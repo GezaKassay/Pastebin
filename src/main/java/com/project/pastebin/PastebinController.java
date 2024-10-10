@@ -1,42 +1,29 @@
 package com.project.pastebin;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class PastebinController {
 
     @Autowired
-    private TextServiceImpl textServiceImpl;
+    private TextRepository textRepository;
 
-    @GetMapping("/")
-    public String viewHomePage(Model model) {
-        model.addAttribute("allTextList", textServiceImpl.getAllText());
-        return "index";
+    @PostMapping("/add")
+    public String addText(@RequestParam String readText) {
+        Text text = new Text();
+        text.setTextInput(readText);
+        textRepository.save(text);
+        return "Added new text!";
     }
 
-    @PostMapping("/save")
-    public String saveText(@ModelAttribute("text") Text text) {
-        textServiceImpl.save(text);
-        return "redirect:/";
+    @GetMapping("/list")
+    public Iterable<Text> getText() {
+        return textRepository.findAll();
     }
 
-    @GetMapping("/showFormForUpdate/{id}")
-    public String updateForm(@PathVariable(value = "id") Integer id, Model model) {
-        Text text = textServiceImpl.getById(id);
-        model.addAttribute("text", text);
-        return "update";
-    }
-
-    @GetMapping("/deleteText/{id}")
-    public String deleteThroughId(@PathVariable(value = "id") Integer id) {
-        textServiceImpl.deleteViaId(id);
-        return "redirect:/";
-
+    @GetMapping("/find/{id}")
+    public Text findTextById(@PathVariable Integer id) {
+        return textRepository.findTextById(id);
     }
 }

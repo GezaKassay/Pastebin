@@ -1,9 +1,8 @@
 package com.project.pastebin;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-@Repository
-public interface TextRepository extends JpaRepository<Text, Integer>{
+public interface TextRepository extends CrudRepository<Text, Integer>{
 
+    Text findTextById(Integer id);
 }
