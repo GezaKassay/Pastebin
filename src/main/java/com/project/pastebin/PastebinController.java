@@ -1,29 +1,49 @@
 package com.project.pastebin;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-@RestController
+@Controller
 public class PastebinController {
 
     @Autowired
-    private TextRepository textRepository;
+    private TextServiceImp textServiceImp;
 
-    @PostMapping("/add")
-    public String addText(@RequestParam String readText) {
+    @GetMapping("/")
+    public String viewHomePage(Model model) {
+        model.addAttribute("alltextlist", textServiceImp.getAllText());
+        return "index";
+    }
+
+    @GetMapping("/addnew")
+    public String addNewText(Model model) {
         Text text = new Text();
-        text.setTextInput(readText);
-        textRepository.save(text);
-        return "Added new text!";
+        model.addAttribute("text", text);
+        return "newtext";
     }
 
-    @GetMapping("/list")
-    public Iterable<Text> getText() {
-        return textRepository.findAll();
+    @PostMapping("/save")
+    public String saveText(@ModelAttribute("text") Text text) {
+        textServiceImp.save(text);
+        return "redirect:/";
     }
 
-    @GetMapping("/find/{id}")
-    public Text findTextById(@PathVariable Integer id) {
-        return textRepository.findTextById(id);
+    @GetMapping("/showFormForUpdate/{id}")
+    public String updateForm(@PathVariable(value = "id") long id, Model model) {
+        Text text = textServiceImp.getById(id);
+        model.addAttribute("text", text);
+        return "update";
+    }
+
+    @GetMapping("/deleteText/{id}")
+    public String deleteThroughId(@PathVariable(value = "id") long id) {
+        textServiceImp.deleteViaId(id);
+        return "redirect:/";
+
     }
 }
