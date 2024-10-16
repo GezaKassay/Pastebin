@@ -29,7 +29,7 @@ public class TextServiceImp implements TextService {
             text = optional.get();
         else
             throw new RuntimeException(
-                    "Employee not found for id : " + id);
+                    "Text not found for id : " + id);
         return text;
     }
 

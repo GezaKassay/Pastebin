@@ -11,9 +11,9 @@
 <div class="container">
     <h1>Show/Update Text</h1>
 
-    <form action="#" th:action="@{/save}" th:object="${text}" method="POST">
+    <p th:text="${text.textInput} "></p>
 
-        <p th:text="${text.textInput} "></p>
+    <form action="#" th:action="@{/save}" th:object="${text}" method="POST">
 
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
