@@ -12,10 +12,8 @@
 <div class="container">
     <h1>Save Text</h1>
 
-    <form action="#" th:action="@{/save}" th:object="${text}"
-          method="POST">
-        <input type="text" th:field="*{textInput}" placeholder="Input Text"
-               class="form-control mb-4 col-4">
+    <form action="#" th:action="@{/save}" th:object="${text}" method="POST">
+        <input type="text" th:field="*{textInput}" placeholder="Input Text" class="form-control mb-4 col-4">
         <button type="submit" class="btn btn-info col-2">Save Text</button>
     </form>
 

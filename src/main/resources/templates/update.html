@@ -2,17 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Update Text</title>
+    <title>Show/Update Text</title>
 
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
-    <h1>Update Text</h1>
+    <h1>Show/Update Text</h1>
 
-    <form action="#" th:action="@{/save}" th:object="${text}"
-          method="POST">
+    <form action="#" th:action="@{/save}" th:object="${text}" method="POST">
+
+        <p th:text="${text.textInput} "></p>
 
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
