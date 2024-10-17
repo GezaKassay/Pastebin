@@ -12,14 +12,14 @@
 <div class="container">
     <h1>Save Text</h1>
 
-    <form action="#" th:action="@{/save}" th:object="${text}" method="POST">
+    <form action="#" th:action="@{/Pastebin/save}" th:object="${text}" method="POST">
         <input type="text" th:field="*{textInput}" placeholder="Input Text" class="form-control mb-4 col-4">
         <button type="submit" class="btn btn-info col-2">Save Text</button>
     </form>
 
     <hr>
 
-    <a th:href="@{/}"> Back to Text List</a>
+    <a th:href="@{/Home}"> Back to Text List</a>
 </div>
 </body>
 </html>

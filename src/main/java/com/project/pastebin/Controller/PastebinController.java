@@ -1,5 +1,7 @@
-package com.project.pastebin;
+package com.project.pastebin.Controller;
 
+import com.project.pastebin.TextEntity;
+import com.project.pastebin.TextServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,36 +16,30 @@ public class PastebinController {
     @Autowired
     private TextServiceImp textServiceImp;
 
-    @GetMapping("/")
-    public String viewHomePage(Model model) {
-        model.addAttribute("alltextlist", textServiceImp.getAllText());
-        return "index";
-    }
-
-    @GetMapping("/addnew")
+    @GetMapping("/Pastebin/add-new")
     public String addNewText(Model model) {
-        Text text = new Text();
+        TextEntity text = new TextEntity();
         model.addAttribute("text", text);
         return "newtext";
     }
 
-    @PostMapping("/save")
-    public String saveText(@ModelAttribute("text") Text text) {
+    @PostMapping("/Pastebin/save")
+    public String saveText(@ModelAttribute("text") TextEntity text) {
         textServiceImp.save(text);
-        return "redirect:/";
+        return "redirect:/Home";
     }
 
-    @GetMapping("/showFormForUpdate/{id}")
+    @GetMapping("/Pastebin/{id}")
     public String updateForm(@PathVariable(value = "id") long id, Model model) {
-        Text text = textServiceImp.getById(id);
+        TextEntity text = textServiceImp.getById(id);
         model.addAttribute("text", text);
         return "update";
     }
 
-    @GetMapping("/deleteText/{id}")
+    @GetMapping("/Pastebin/{id}/delete")
     public String deleteThroughId(@PathVariable(value = "id") long id) {
         textServiceImp.deleteViaId(id);
-        return "redirect:/";
+        return "redirect:/Home";
 
     }
 }

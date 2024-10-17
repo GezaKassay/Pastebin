@@ -3,7 +3,7 @@ package com.project.pastebin;
 import jakarta.persistence.*;
 
 @Entity
-public class Text {
+public class TextEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
