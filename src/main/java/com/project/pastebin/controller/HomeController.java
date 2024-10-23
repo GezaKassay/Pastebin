@@ -1,4 +1,4 @@
-package com.project.pastebin.Controller;
+package com.project.pastebin.controller;
 
 import com.project.pastebin.TextServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;

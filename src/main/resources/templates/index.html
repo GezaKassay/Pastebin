@@ -22,7 +22,9 @@
         <tr th:each="text:${alltextlist}">
             <td><p th:text="${#strings.abbreviate(text.textInput,50)} "></p></td>
             <td> <a th:href="@{/Pastebin/{id}(id=${text.id})}" class="btn btn-primary">Show/Update</a>
-                <a th:href="@{/Pastebin/{id}/delete(id=${text.id})}" class="btn btn-danger">Delete</a>
+                <form method="POST" th:action="@{/Pastebin/{id}/delete(id=${text.id})}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </td>
         </tr>
         </tbody>

@@ -1,14 +1,11 @@
-package com.project.pastebin.Controller;
+package com.project.pastebin.controller;
 
 import com.project.pastebin.TextEntity;
 import com.project.pastebin.TextServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PastebinController {
@@ -36,7 +33,7 @@ public class PastebinController {
         return "update";
     }
 
-    @GetMapping("/Pastebin/{id}/delete")
+    @PostMapping("/Pastebin/{id}/delete")
     public String deleteThroughId(@PathVariable(value = "id") long id) {
         textServiceImp.deleteViaId(id);
         return "redirect:/Home";
