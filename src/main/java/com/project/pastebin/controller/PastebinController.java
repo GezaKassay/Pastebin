@@ -13,30 +13,30 @@ public class PastebinController {
     @Autowired
     private TextServiceImp textServiceImp;
 
-    @GetMapping("/Pastebin/add-new")
+    @GetMapping("/pastebin/add-new")
     public String addNewText(Model model) {
         TextEntity text = new TextEntity();
         model.addAttribute("text", text);
         return "newtext";
     }
 
-    @PostMapping("/Pastebin/save")
+    @PostMapping("/pastebin/save")
     public String saveText(@ModelAttribute("text") TextEntity text) {
         textServiceImp.save(text);
-        return "redirect:/Home";
+        return "redirect:/home";
     }
 
-    @GetMapping("/Pastebin/{id}")
+    @GetMapping("/pastebin/{id}")
     public String updateForm(@PathVariable(value = "id") long id, Model model) {
         TextEntity text = textServiceImp.getById(id);
         model.addAttribute("text", text);
         return "update";
     }
 
-    @PostMapping("/Pastebin/{id}/delete")
+    @PostMapping("/pastebin/{id}/delete")
     public String deleteThroughId(@PathVariable(value = "id") long id) {
         textServiceImp.deleteViaId(id);
-        return "redirect:/Home";
+        return "redirect:/home";
 
     }
 }
