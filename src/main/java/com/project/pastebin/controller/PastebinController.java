@@ -23,7 +23,7 @@ public class PastebinController {
     @PostMapping("/pastebin/save")
     public String saveText(@ModelAttribute("text") TextEntity text) {
         textServiceImp.save(text);
-        return "redirect:/home";
+        return "redirect:/pastebin/home";
     }
 
     @GetMapping("/pastebin/{id}")
@@ -36,7 +36,7 @@ public class PastebinController {
     @PostMapping("/pastebin/{id}/delete")
     public String deleteThroughId(@PathVariable(value = "id") long id) {
         textServiceImp.deleteViaId(id);
-        return "redirect:/home";
+        return "redirect:/pastebin/home";
 
     }
 }

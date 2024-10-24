@@ -12,7 +12,7 @@ public class HomeController {
     @Autowired
     private TextServiceImp textServiceImp;
 
-    @GetMapping("/home")
+    @GetMapping("/pastebin/home")
     public String viewHomePage(Model model) {
         model.addAttribute("alltextlist", textServiceImp.getAllText());
         return "index";
